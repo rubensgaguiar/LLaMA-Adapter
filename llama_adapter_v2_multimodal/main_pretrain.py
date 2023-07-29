@@ -6,6 +6,7 @@ from torch.utils.data import Dataset
 import util.misc as misc
 from util.misc import NativeScalerWithGradNormCount as NativeScaler
 from llama.llama_adapter import LLaMA_adapter
+from llama.llama_adapter import load
 
 from data.dataset import PretrainDataset, transform_train
 
@@ -102,9 +103,12 @@ def main(args):
     llama_type = args.llama_type
     llama_ckpt_dir = os.path.join(args.llama_path, llama_type)
     llama_tokenzier_path = os.path.join(args.llama_path, 'tokenizer.model')
-    model = LLaMA_adapter(llama_ckpt_dir, llama_tokenzier_path, phase="pretrain")
+    #model = LLaMA_adapter(llama_ckpt_dir, llama_tokenzier_path, phase="pretrain")
 
-    model.to(device)
+    #model.to(device)
+
+    #loading the llama-adapter-v2 finetunned model
+    model, _ = load("BIAS-7B", args.lamma_path, device=device, phase="pretrain")
 
     model_without_ddp = model
     print("Model = %s" % str(model_without_ddp))

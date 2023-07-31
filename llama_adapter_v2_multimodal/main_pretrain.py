@@ -108,7 +108,7 @@ def main(args):
     #model.to(device)
 
     #loading the llama-adapter-v2 finetunned model
-    model, _ = load("BIAS-7B", args.lamma_path, device=device, phase="pretrain")
+    model, _ = load("BIAS-7B", args.llama_path, device=device, phase="pretrain")
 
     model_without_ddp = model
     print("Model = %s" % str(model_without_ddp))
